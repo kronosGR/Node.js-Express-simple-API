@@ -1,7 +1,8 @@
 const express = require('express');
 
-const friendsRouter = require('./routes/friends.router')
+const friendsRouter = require('./routes/friends.router');
 const messagesRouter = require('./routes/messages.router');
+const path = require('path');
 
 const app = express();
 
@@ -16,9 +17,15 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.baseUrl}${req.url} ${delta}ms`);
 });
 
+// on /
+// app.use(express.static('public'));
+//on /site
+app.use('/site', express.static(path.join(__dirname, 'public')));
+// static files is better to be served with cdn like Amazon cloudfront and akamai
+
 app.use(express.json());
 
-app.use('/friends',friendsRouter);
+app.use('/friends', friendsRouter);
 app.use('/messages', messagesRouter);
 
 app.listen(PORT, () => {

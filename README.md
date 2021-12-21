@@ -4,5 +4,5 @@
 * MVC pattern
 * Routes
 * GET, POST
-* middlewares
-* custom middlewares
+* middlewares / custom middlewares
+* send file
