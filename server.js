@@ -6,6 +6,9 @@ const path = require('path');
 
 const app = express();
 
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+
 const PORT = 3001;
 
 app.use((req, res, next) => {
@@ -25,6 +28,12 @@ app.use('/site', express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.render('index',{
+    title: 'My friends',
+    caption: 'Let go skiing'
+  })
+})
 app.use('/friends', friendsRouter);
 app.use('/messages', messagesRouter);
 
